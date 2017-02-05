@@ -2,8 +2,6 @@ import re
 def search():
     with open('chuvash.html', 'r', encoding = 'utf-8') as f:
         source = f.read()
-        ## <a href="https://ru.wikipedia.org/wiki/ISO_639#.D0.90.D0.BB.D1.8C.D1.84.D0.B0-3" title="ISO 639">ISO 639-3</a>
-        ## href="http://www-01.sil.org/iso639-3/documentation.asp?id=chv">chv</a>
         search_arr = source.split('<a')
         for el in search_arr:
             match = re.search('.*iso639\-3\/documentation\.asp\?id\=.*', el)
