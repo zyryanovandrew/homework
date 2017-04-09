@@ -2,16 +2,9 @@ import re
 def preproc():
     with open('text.txt', 'r', encoding = 'utf-8') as f:
         text = f.read()
-        allsent = re.split(r'\.', text)
+        allsent = re.split(r'[\.\?\!]', text)
         allsent = [sent.lower() for sent in allsent]
-        allsent = [re.sub(r',', '', sent) for sent in allsent]
-        allsent = [re.sub(r'—', '', sent) for sent in allsent]
-        allsent = [re.sub(r'\(', '', sent) for sent in allsent]
-        allsent = [re.sub(r'\)', '', sent) for sent in allsent]
-        allsent = [re.sub(r'“', '', sent) for sent in allsent]
-        allsent = [re.sub(r'”', '', sent) for sent in allsent]
-        allsent = [re.sub(r'\'', '', sent) for sent in allsent]
-        allsent = [re.sub(r':', '', sent) for sent in allsent]
+        allsent = [re.sub(r'[,—“\':”\(\)]', '', sent) for sent in allsent]
     return allsent
 
 def count(sent):
@@ -23,7 +16,7 @@ def count(sent):
 
 def display(several):
     print('Следующее предложение: ')
-    template = '{} {:^10}'
+    template = '{:^10} {:^10}'
     for keyword in several:
         print(template.format(keyword, several[keyword]))
 
@@ -32,6 +25,3 @@ for sentence in allsent:
     arr = re.split(r' ', sentence)
     several = count(arr)
     display(several)
-
-    
-
