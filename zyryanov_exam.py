@@ -21,7 +21,7 @@ def preprocessing():
             topicstr = topic[0]
             topicstr = re.sub('<meta content="', '', topicstr)
             topicstr = re.sub('" name="topic"></meta>', '', topicstr)
-            meta = el+'.xhtml'+','+authorstr+','+topicstr+'\n'
+            meta = el+','+authorstr+','+topicstr+'\n'
             all_meta.append(meta)
 
             ## создание списка слов, а затем биграм
@@ -36,9 +36,7 @@ def preprocessing():
                 words.append(wordsrawstr)
             bigrams = []
             for ind in range(1, len(words) - 1):
-                bigrams.append(' '.join([words[ind - 1], words[ind]]))
-            
-            
+                bigrams.append(' '.join([words[ind - 1], words[ind]]))           
     w.close()
     return bigrams, all_meta
 
@@ -47,12 +45,18 @@ def data(all_meta):
     w.write('Название файла,Автор,Тематика текста\n')
     for el in all_meta:
         w.write(el)
+    w.close()
         
-
-
+def bigram_processing(bigrams):
+    w = open('bigrams_res.txt', 'w', encoding = 'utf-8')
+    for el in bigrams:
+        if re.match(r'(в|на|о|об|обо|при|по) .+(е|и|ах|ях)', el) != None:
+            bigram = el + '\n'
+            w.write(bigram)
+    w.close()
 
 bigrams, all_meta = preprocessing()
-print(bigrams)
+bigram_processing(bigrams)
 data(all_meta)
 
         
