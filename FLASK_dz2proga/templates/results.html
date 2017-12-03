@@ -1,0 +1,17 @@
+﻿<html>
+    <head>
+	<title>Результаты поиска</title>
+	</head>
+    <body>
+		<h1>Вот что нашлось по вашему запросу:</h1>
+		<h2>{{stimulus}}</h2>
+
+		<p>Процентное соотношение номинаций:</p>			
+			{% for nom, percent in percentage.items() %}
+			{{nom}} : {{percent}} <br/>
+			{% endfor %}
+			<p>Предсказуемость предложения: {{pred}}</p>
+		<br/>
+		<a href ="/search">Вернуться к странице поиска</a>
+    </body>
+</html>
