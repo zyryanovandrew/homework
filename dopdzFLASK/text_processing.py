@@ -55,7 +55,6 @@ def dict_crowler():
         with urllib.request.urlopen(req) as response:
             page_code = response.read().decode('windows-1251')
             dict_parser(page_code, dorev_dict)
-    letters = ['a','b','c','d','e','f']
     for i in range (3,6):
         req = urllib.request.Request('http://www.dorev.ru/ru-index.html?l=d'+letters[i], data=None, headers={'User-Agent':'Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11'})
         with urllib.request.urlopen(req) as response:
@@ -63,7 +62,7 @@ def dict_crowler():
             dict_parser(page_code, dorev_dict)
     return dorev_dict
 
-##dorev_dict = dict_crowler()
+dorev_dict = dict_crowler()
 
 def transliterator(input_text):
     mystem = Mystem()
@@ -136,4 +135,4 @@ def result():
     return render_template('result.html', input_type = input_type, result = result_text)
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run()
