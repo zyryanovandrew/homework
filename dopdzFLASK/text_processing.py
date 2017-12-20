@@ -122,8 +122,12 @@ def pagetranslit():
 def result():
     try:
         input_string_raw = request.args.get('input_url')
-        input_string = input_string_raw.lower()
+        input_url = input_string_raw.lower()
         input_type = 'url'
+        req = urllib.request.Request(input_url)
+        with urllib.request.urlopen(req) as response:
+            page_code = response.read().decode('utf-8')
+            input_string = cleanTag.sub('', page_code)
     except:
         try:
             input_string_raw = request.args.get('input_word')
