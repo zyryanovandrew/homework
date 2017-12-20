@@ -102,7 +102,7 @@ def transliterator(input_text):
                                     result_word += letter                      
                     continue
                 except:
-                    result_word = raw + 'совсем никак'    
+                    result_word = raw  
         if raw[0] == '[А-Я]':
             result_word.capitalize()
         result_text += result_word
